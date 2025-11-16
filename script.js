@@ -1,30 +1,36 @@
-async function lookupCode() {
-    const code = document.getElementById("codeInput").value.trim();
-    const resultsDiv = document.getElementById("results");
-    
-    resultsDiv.innerHTML = "<p>Searching...</p>";
+async function getPhoto() {
+    const codeInput = document.getElementById("photoCode").value.trim();
+    const resultBox = document.getElementById("result");
+    const imgBox = document.getElementById("photo");
 
-    // Replace this after you send me your Function URL
-    const url = `YOUR_FUNCTION_URL_HERE?code=${code}`;
+    if (!codeInput) {
+        resultBox.innerText = "Please enter a code.";
+        return;
+    }
+
+    resultBox.innerText = "Loading...";
 
     try {
-        const response = await fetch(url);
+        const apiUrl = `https://lynqphotos-api-malaysia-eyh0brfmgrdac3f6.malaysiawest-01.azurewebsites.net/api/GetPhotoByCode2?code=t-31Jd55uO0PfLDLpr3xfvQBPKRQ91GCJJe18FsWhSNfAzFuAxBWAA==&photoCode=${encodeURIComponent(codeInput)}`;
+
+        const response = await fetch(apiUrl);
         const data = await response.json();
 
-        if (!data || data.length === 0) {
-            resultsDiv.innerHTML = "<p>No photos found.</p>";
+        if (data.error) {
+            resultBox.innerText = data.error;
+            imgBox.src = "";
+            imgBox.style.display = "none";
             return;
         }
 
-        resultsDiv.innerHTML = "";
+        // Show image
+        imgBox.src = `data:image/jpeg;base64,${data.photo}`;
+        imgBox.style.display = "block";
 
-        data.forEach(photo => {
-            const img = document.createElement("img");
-            img.src = `data:image/jpeg;base64,${photo.PhotoBinary}`;
-            resultsDiv.appendChild(img);
-        });
-
+        resultBox.innerText = "Photo loaded!";
     } catch (error) {
-        resultsDiv.innerHTML = "<p>Error fetching photos.</p>";
+        resultBox.innerText = "Server error.";
+        console.error(error);
     }
 }
+
