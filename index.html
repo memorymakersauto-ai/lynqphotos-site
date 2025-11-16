@@ -1,24 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>LYNQ Photos Lookup</title>
-<link rel="stylesheet" href="styles.css">
+    <title>LYNQ Photo Lookup</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="container">
-    <h1>LYNQ Photos</h1>
-    <p class="subtitle">Enter your photo code to view your images</p>
+    <h1>LYNQ Photo Lookup</h1>
 
-    <div class="lookup-box">
-        <input id="codeInput" type="text" placeholder="Enter Code (ex: A1234)" />
-        <button onclick="lookupCode()">Search</button>
-    </div>
+    <input id="photoCode" placeholder="Enter your photo code">
+    <button onclick="getPhoto()">Get Photo</button>
 
-    <div id="results"></div>
-</div>
+    <p id="result"></p>
 
-<script src="script.js"></script>
+    <img id="photo" style="display:none; max-width:400px; margin-top:20px;">
+
+    <script src="script.js"></script>
 </body>
 </html>
+
