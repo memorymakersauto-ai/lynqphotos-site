@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>LYNQ Photos</title>
-    <meta charset="UTF-8"/>
-    <style>
-        body { font-family: Arial; text-align: center; padding-top: 100px; }
-        h1 { color: #333; }
-    </style>
+<meta charset="UTF-8">
+<title>LYNQ Photos Lookup</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welcome to LYNQ Photos</h1>
-    <p>Your site is deployed successfully!</p>
+
+<div class="container">
+    <h1>LYNQ Photos</h1>
+    <p class="subtitle">Enter your photo code to view your images</p>
+
+    <div class="lookup-box">
+        <input id="codeInput" type="text" placeholder="Enter Code (ex: A1234)" />
+        <button onclick="lookupCode()">Search</button>
+    </div>
+
+    <div id="results"></div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
